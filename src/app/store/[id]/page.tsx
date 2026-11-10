@@ -53,7 +53,7 @@ function Product({ offer }: { offer: Offer }) {
     return (
       <div className="max-w-[560px]">
         <Check className="size-8 text-green" strokeWidth={2} aria-hidden />
-        <h1 className="mt-4 text-[36px] font-bold leading-tight tracking-[-0.03em]">Thank you</h1>
+        <h1 className="mt-4 text-[40px] font-bold leading-tight tracking-[-0.03em]">Thank you</h1>
         <p className="mt-3 text-[16px] text-ink-2">Paid <b className="text-ink num">{paid.amount ? gbp(Number(paid.amount.value)) : ""}</b> with PayPal for {qty} × {offer.product}.</p>
         <p className="mt-2 font-mono text-[12px] text-ink-3">PayPal order {paid.orderId} · {paid.status.toLowerCase()}</p>
       </div>
@@ -64,7 +64,7 @@ function Product({ offer }: { offer: Offer }) {
   return (
     <div className="grid grid-cols-1 gap-x-14 gap-y-10 md:grid-cols-[1.1fr_1fr]">
       <div>
-        <h1 className="text-balance text-[40px] font-bold leading-[1.02] tracking-[-0.035em] md:text-[52px]">{offer.product}</h1>
+        <h1 className="text-balance text-[40px] font-bold leading-[1.02] tracking-[-0.035em] md:text-[56px]">{offer.product}</h1>
         <p className="mt-6 max-w-[52ch] text-[16px] leading-relaxed text-ink-2">
           From the Kettle &amp; Twine gift range. Sold by the unit; most customers buy {offer.defaultQty} at a time for their own shop or market stall.
         </p>
@@ -84,7 +84,7 @@ function Product({ offer }: { offer: Offer }) {
           </div>
         </div>
         <div className="flex items-baseline justify-between border-t border-rule pt-4">
-          <span className="text-[15px] font-semibold">Total</span>
+          <span className="text-[16px] font-semibold">Total</span>
           <span className="text-[22px] font-bold num">{gbp(total)}</span>
         </div>
         <div ref={holder} className="min-h-[52px]" />

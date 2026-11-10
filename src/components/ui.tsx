@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState, type ReactNode, type ButtonHTMLAttributes } from "react";
-import { Loader2, ArrowUpRight } from "lucide-react";
+import { Loader2, ArrowUpRight, Check } from "lucide-react";
 import { api, ApiError } from "@/lib/client/api";
 
 type Tone = "primary" | "secondary" | "danger" | "quiet";
@@ -12,7 +12,7 @@ const tones: Record<Tone, string> = {
   quiet: "text-ink underline decoration-rule-2 hover:decoration-ink disabled:text-ink-3",
 };
 const base = "step inline-flex items-center justify-center gap-2 font-medium disabled:cursor-not-allowed";
-const sizes = { md: "h-10 px-4 text-[14px]", sm: "h-8 px-3 text-[13px]" };
+const sizes = { md: "h-10 px-4 text-[14px] pointer-coarse:h-11", sm: "h-9 px-3 text-[13px] pointer-coarse:h-11" };
 
 export function Button({ tone = "primary", size = "md", busy, children, className = "", ...rest }: ButtonHTMLAttributes<HTMLButtonElement> & { tone?: Tone; size?: "md" | "sm"; busy?: boolean }) {
   return (
@@ -79,7 +79,7 @@ export function PageHeader({ title, lede, actions }: { title: ReactNode; lede?: 
     <header className="mb-8 flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
       <div className="max-w-[68ch]">
         <h1 className="text-balance text-[32px] font-bold leading-[1.05] tracking-[-0.03em] md:text-[40px]">{title}</h1>
-        {lede && <p className="mt-3 text-[15px] leading-relaxed text-ink-2">{lede}</p>}
+        {lede && <p className="mt-3 text-[16px] leading-relaxed text-ink-2">{lede}</p>}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
     </header>
@@ -127,7 +127,9 @@ export function ApproveAction<T>({ summary, label = "Approve", request, onDone, 
     <div className="flex flex-col gap-3">
       <p className="text-[13px] leading-relaxed text-ink-2">{summary}</p>
       <div className="flex flex-wrap items-center gap-3">
-        <Button onClick={run} busy={state.busy} disabled={disabled}>{label}</Button>
+        {state.result !== undefined
+          ? <Button disabled><Check className="size-4" aria-hidden />Approved</Button>
+          : <Button onClick={run} busy={state.busy} disabled={disabled}>{label}</Button>}
       </div>
       {state.error && (
         <div role="alert" className="border border-red px-3 py-2 text-[13px] text-red-ink">
@@ -135,7 +137,12 @@ export function ApproveAction<T>({ summary, label = "Approve", request, onDone, 
           <p>{state.error.message}</p>
         </div>
       )}
-      {state.result !== undefined && renderResult && <div className="border border-green px-3 py-2 text-[13px] text-ink">{renderResult(state.result)}</div>}
+      {state.result !== undefined && (
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border border-green px-3 py-2 text-[13px] text-ink">
+          <span>{renderResult ? renderResult(state.result) : "Done."}</span>
+          <Button tone="quiet" className="text-[13px]" onClick={() => setState({ busy: false })}>Make another change</Button>
+        </div>
+      )}
     </div>
   );
 }

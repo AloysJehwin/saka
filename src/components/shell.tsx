@@ -9,11 +9,11 @@ import { inputCls } from "./ui";
 import { gbp } from "@/lib/client/format";
 
 const NAV = [
-  { href: "/app", label: "Overview", icon: LayoutGrid },
-  { href: "/app/history", label: "History check", icon: History },
-  { href: "/app/what-if", label: "What-if", icon: SlidersHorizontal },
-  { href: "/app/test", label: "Price test", icon: FlaskConical },
-  { href: "/app/apply", label: "Apply", icon: Stamp },
+  { href: "/app", label: "Overview", short: "Overview", icon: LayoutGrid },
+  { href: "/app/history", label: "History check", short: "History", icon: History },
+  { href: "/app/what-if", label: "What-if", short: "What-if", icon: SlidersHorizontal },
+  { href: "/app/test", label: "Price test", short: "Test", icon: FlaskConical },
+  { href: "/app/apply", label: "Apply", short: "Apply", icon: Stamp },
 ];
 
 export function Shell({ children }: { children: ReactNode }) {
@@ -35,19 +35,24 @@ function Rail() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   return (
-    <div className="bg-rail"><aside className="sticky top-0 z-30 flex flex-col bg-rail text-rail-ink md:h-dvh">
-      <div className="flex items-baseline gap-2 px-5 pb-4 pt-5 md:pb-8">
+    <div className="bg-rail"><aside className="flex flex-col bg-rail text-rail-ink md:sticky md:top-0 md:z-30 md:h-dvh">
+      <div className="flex items-center gap-2 px-5 pb-3 pt-4 md:items-baseline md:pb-8 md:pt-5">
         <Link href="/app" className="text-[22px] font-bold tracking-[-0.04em]">saka</Link>
         <span className="text-[12px] text-rail-ink-2">PriceTwin</span>
+        <div className="ml-auto flex items-center md:hidden">
+          <a href="/store/club" target="_blank" rel="noreferrer" aria-label="Gift Box Club page" className="grid size-11 place-items-center text-rail-ink-2 hover:text-rail-ink"><Gift className="size-5" strokeWidth={1.75} aria-hidden /></a>
+          {user && <SignOut className="size-11" />}
+        </div>
       </div>
-      <nav aria-label="Steps" className="flex gap-1 overflow-x-auto px-3 pb-3 md:flex-col md:gap-0.5 md:overflow-visible md:pb-0">
-        {NAV.map(({ href, label, icon: Icon }) => {
+      <nav aria-label="Steps" className="grid grid-cols-5 gap-1 px-2 pb-2 md:flex md:flex-col md:gap-0.5 md:px-3 md:pb-0">
+        {NAV.map(({ href, label, short, icon: Icon }) => {
           const active = href === "/app" ? path === "/app" : path.startsWith(href);
           return (
             <Link key={href} href={href} aria-current={active ? "page" : undefined}
-              className={`step flex h-10 shrink-0 items-center gap-3 px-3 text-[14px] ${active ? "bg-rail-ink text-rail" : "text-rail-ink hover:bg-rail-rule"}`}>
-              <Icon className="size-4" strokeWidth={1.75} aria-hidden />
-              <span className="whitespace-nowrap">{label}</span>
+              className={`step flex h-14 min-w-0 flex-col items-center justify-center gap-1 text-[11px] font-medium md:h-10 md:flex-row md:justify-start md:gap-3 md:px-3 md:text-[14px] md:font-normal ${active ? "bg-rail-ink text-rail" : "text-rail-ink hover:bg-rail-rule"}`}>
+              <Icon className="size-4 shrink-0" strokeWidth={1.75} aria-hidden />
+              <span className="whitespace-nowrap md:hidden">{short}</span>
+              <span className="hidden whitespace-nowrap md:inline">{label}</span>
             </Link>
           );
         })}
@@ -63,14 +68,20 @@ function Rail() {
               <p className="truncate text-[13px] font-medium">{user.name || user.email}</p>
               <p className="truncate text-[12px] text-rail-ink-2">{user.email}</p>
             </div>
-            <button aria-label="Sign out" title="Sign out" className="grid size-8 place-items-center text-rail-ink-2 hover:bg-rail-rule hover:text-rail-ink"
-              onClick={() => authClient.signOut().then(() => { window.location.href = "/sign-in"; })}>
-              <LogOut className="size-4" strokeWidth={1.75} />
-            </button>
+            <SignOut className="size-8" />
           </div>
         )}
       </div>
     </aside></div>
+  );
+}
+
+function SignOut({ className }: { className: string }) {
+  return (
+    <button aria-label="Sign out" title="Sign out" className={`grid place-items-center text-rail-ink-2 hover:bg-rail-rule hover:text-rail-ink ${className}`}
+      onClick={() => authClient.signOut().then(() => { window.location.href = "/sign-in"; })}>
+      <LogOut className="size-4" strokeWidth={1.75} aria-hidden />
+    </button>
   );
 }
 

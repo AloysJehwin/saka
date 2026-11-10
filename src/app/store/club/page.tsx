@@ -15,7 +15,7 @@ export default function ClubPage() {
     <ShopFrame>
       {club.error ? <ErrorNote onRetry={club.reload}>{club.error}</ErrorNote> : !club.data ? <Loading /> : !club.data.plan ? (
         <div className="max-w-[560px]">
-          <h1 className="text-[36px] font-bold tracking-[-0.03em]">The Gift Box Club opens soon</h1>
+          <h1 className="text-[40px] font-bold tracking-[-0.03em]">The Gift Box Club opens soon</h1>
           <p className="mt-3 text-[16px] text-ink-2">The shop hasn&apos;t set up the club on PayPal yet. In saka, open Apply and approve &ldquo;set up the club on PayPal&rdquo;.</p>
         </div>
       ) : <Subscribe name={club.data.name} plan={club.data.plan} />}
@@ -51,7 +51,7 @@ function Subscribe({ name, plan }: { name: string; plan: NonNullable<Club["plan"
     return (
       <div className="max-w-[560px]">
         <Check className="size-8 text-green" strokeWidth={2} aria-hidden />
-        <h1 className="mt-4 text-[36px] font-bold tracking-[-0.03em]">Welcome to the club</h1>
+        <h1 className="mt-4 text-[40px] font-bold tracking-[-0.03em]">Welcome to the club</h1>
         <p className="mt-3 text-[16px] text-ink-2">Your first box ships this month. Manage or cancel any time in your PayPal account.</p>
         <p className="mt-2 font-mono text-[12px] text-ink-3">PayPal subscription {done}</p>
       </div>
@@ -60,7 +60,7 @@ function Subscribe({ name, plan }: { name: string; plan: NonNullable<Club["plan"
   return (
     <div className="grid grid-cols-1 gap-x-14 gap-y-10 md:grid-cols-[1.1fr_1fr]">
       <div>
-        <h1 className="text-balance text-[44px] font-bold leading-[1.02] tracking-[-0.035em] md:text-[56px]">{name}</h1>
+        <h1 className="text-balance text-[40px] font-bold leading-[1.02] tracking-[-0.035em] md:text-[56px]">{name}</h1>
         <p className="mt-6 max-w-[52ch] text-[16px] leading-relaxed text-ink-2">A box of five seasonal gifts from the shop, every month: bags, tins, candles and paper goods. Skip or cancel whenever you like.</p>
       </div>
       <div className="flex flex-col gap-6 border-t border-ink pt-6">

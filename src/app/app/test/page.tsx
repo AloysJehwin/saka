@@ -133,8 +133,9 @@ function RunningTest({ id, onClose }: { id: string; onClose: () => void }) {
   const v = useApi<ExperimentView>(`/api/experiments/${id}`, 2500);
   const [scenario, setScenario] = useState<(typeof SCENARIOS)[number]["id"]>("history");
   const [busy, setBusy] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<{ at: string; msg: string } | null>(null);
   const [copied, setCopied] = useState(false);
+  const [confirmStop, setConfirmStop] = useState(false);
 
   if (v.error && !v.data) return <ErrorNote onRetry={v.reload}>{v.error}</ErrorNote>;
   if (!v.data) return <Loading label="Loading the price test" />;
@@ -148,7 +149,7 @@ function RunningTest({ id, onClose }: { id: string; onClose: () => void }) {
 
   const act = async (label: string, fn: () => Promise<unknown>) => {
     setBusy(label); setError(null);
-    try { await fn(); await v.reload(); } catch (err) { setError((err as Error).message); } finally { setBusy(null); }
+    try { await fn(); await v.reload(); } catch (err) { setError({ at: label, msg: (err as Error).message }); } finally { setBusy(null); }
   };
 
   return (
@@ -159,14 +160,24 @@ function RunningTest({ id, onClose }: { id: string; onClose: () => void }) {
         actions={<>
           <StatusFor status={e.status} />
           <LinkButton href={`/store/${e.id}`} external tone="secondary">Open storefront</LinkButton>
-          <Button tone="secondary" onClick={() => { navigator.clipboard.writeText(storeUrl).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1600); }); }}>
+          <Button tone="secondary" onClick={() => { navigator.clipboard.writeText(storeUrl).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1600); }, () => setError({ at: "copy", msg: `Couldn't copy. The link is ${storeUrl}` })); }}>
             {copied ? <Check className="size-4" aria-hidden /> : <Copy className="size-4" aria-hidden />}{copied ? "Copied" : "Copy link"}
           </Button>
-          {running && <Button tone="danger" busy={busy === "stop"} onClick={() => act("stop", () => api(`/api/experiments/${id}/stop`, { body: {} }))}>Stop test</Button>}
+          {running && !confirmStop && <Button tone="danger" onClick={() => setConfirmStop(true)}>Stop test</Button>}
           {!running && <Button tone="quiet" onClick={onClose}>New test</Button>}
         </>}
       />
 
+      {running && confirmStop && (
+        <div role="alertdialog" aria-label="Stop this test?" className="mb-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border border-red px-4 py-3">
+          <p className="text-[14px] text-ink">Stop the test? Every shopper goes back to <b className="num">{gbp(e.control_price)}</b>. A stopped test can&apos;t be restarted; you&apos;d start a new one.</p>
+          <div className="flex items-center gap-2">
+            <Button tone="danger" busy={busy === "stop"} onClick={() => act("stop", () => api(`/api/experiments/${id}/stop`, { body: {} })).then(() => setConfirmStop(false))}>Stop test</Button>
+            <Button tone="secondary" onClick={() => setConfirmStop(false)} autoFocus>Keep running</Button>
+          </div>
+        </div>
+      )}
+      {error && !error.at.startsWith("sim") && <div className="mb-8"><ErrorNote>{error.msg}</ErrorNote></div>}
       {e.status === "ready" && (
         <Banner tone="ready" title={`Ready to roll out ${gbp(e.test_price)}`} text={result.reason}
           action={<Button onClick={() => { handoff.set("proposal", { kind: "new_customers_only", code: e.code, newPrice: e.test_price, title: `Roll out ${gbp(e.test_price)}`, rationale: result.reason, risk: "", introPrice: null, introMonths: null, canaryShare: null }); router.push("/app/apply"); }}>Review and apply</Button>} />
@@ -235,7 +246,7 @@ function RunningTest({ id, onClose }: { id: string; onClose: () => void }) {
             ))}
           </div>
           <p className="mt-3 text-[12px] leading-relaxed text-ink-3">Simulated shoppers buy 8% of the time at today&apos;s price. The test doesn&apos;t know which behaviour you picked; watch it find out. A small price change needs thousands of shoppers to settle, which is why the test keeps going rather than guessing. Real storefront checkouts always count.</p>
-          {error && <div className="mt-3"><ErrorNote>{error}</ErrorNote></div>}
+          {error?.at.startsWith("sim") && <div className="mt-3"><ErrorNote>{error.msg}</ErrorNote></div>}
         </Section>
       </div>
 

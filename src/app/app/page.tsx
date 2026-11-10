@@ -32,7 +32,7 @@ export default function OverviewPage() {
         title={d.description}
         lede={<>Charging <b className="text-ink num">{gbp(d.currentPrice.price)}</b> since {dateShort(d.currentPrice.since)}. Typical order {d.unitsPerOrder} units. Last 12 weeks of real sales to {dateShort(d.asOf)}.</>}
         actions={<>
-          {d.runningTest && <LinkButton href="/app/test" tone="secondary">Price test running</LinkButton>}
+          {d.runningTest && <LinkButton href="/app/test" tone="secondary">See the running test</LinkButton>}
           <LinkButton href="/app/what-if" tone="primary">Try a new price</LinkButton>
         </>}
       />

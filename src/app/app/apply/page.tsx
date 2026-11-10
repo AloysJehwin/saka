@@ -64,6 +64,7 @@ export default function ApplyPage() {
 function ProductRollout({ o, prices, suggested, onChange }: { o: Overview; prices: Apply["prices"]; suggested: number | null; onChange: () => void }) {
   const [price, setPrice] = useState<number | "">(suggested ?? round2(o.currentPrice.price * 1.1));
   const [undoing, setUndoing] = useState(false);
+  const [undoError, setUndoError] = useState<string | null>(null);
   const active = prices.find((p) => p.active);
   return (
     <Section title={`${o.description}: price for new checkouts`} aside={`Today ${gbp(o.currentPrice.price)} · ${o.currentPrice.source === "rollout" ? "set in saka" : "from sales history"}`}>
@@ -95,9 +96,10 @@ function ProductRollout({ o, prices, suggested, onChange }: { o: Overview; price
           )}
           {active && (
             <div className="mt-3">
-              <Button tone="secondary" size="sm" busy={undoing} onClick={async () => { setUndoing(true); try { await api("/api/apply/rollback", { body: { code: o.code } }); onChange(); } finally { setUndoing(false); } }}>
+              <Button tone="secondary" size="sm" busy={undoing} onClick={async () => { setUndoing(true); setUndoError(null); try { await api("/api/apply/rollback", { body: { code: o.code } }); onChange(); } catch (err) { setUndoError((err as Error).message); } finally { setUndoing(false); } }}>
                 Undo: go back to the previous price
               </Button>
+              {undoError && <p role="alert" className="mt-2 text-[13px] text-red-ink">Couldn&apos;t undo: {undoError}</p>}
             </div>
           )}
         </div>
@@ -200,7 +202,7 @@ function Lever({ title, note, children }: { title: string; note: string; childre
   return (
     <div className="flex flex-col gap-4 border-b border-rule py-6 lg:px-6 lg:odd:border-r lg:odd:pl-0 lg:even:pr-0">
       <div>
-        <h3 className="text-[15px] font-semibold">{title}</h3>
+        <h3 className="text-[16px] font-semibold">{title}</h3>
         <p className="mt-1 text-[13px] leading-relaxed text-ink-3">{note}</p>
       </div>
       {children}

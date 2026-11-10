@@ -1,4 +1,5 @@
 import { headers } from "next/headers";
+import { unstable_rethrow } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { PayPalError } from "@/lib/paypal/client";
 
@@ -17,6 +18,7 @@ export async function handle(fn: () => Promise<unknown>): Promise<Response> {
   try {
     return Response.json(await fn());
   } catch (e) {
+    unstable_rethrow(e); // let Next's own signals (prerender bail-out, redirects) through
     if (e instanceof HttpError) return Response.json({ error: e.message }, { status: e.status });
     if (e instanceof PayPalError) {
       const issue = (e.details as { issue?: string; description?: string }[] | undefined)?.[0];

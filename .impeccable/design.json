@@ -1,6 +1,6 @@
 {
  "schemaVersion": 2,
- "generatedAt": "2026-11-10T09:33:41.819941Z",
+ "generatedAt": "2026-11-10T10:01:20.016718+00:00",
  "title": "Design System: saka",
  "extensions": {
   "colorMeta": {
@@ -288,6 +288,30 @@
    "code": {
     "displayName": "Code",
     "purpose": "PayPal ids and item codes only."
+   },
+   "hero": {
+    "displayName": "Hero",
+    "purpose": "The one figure a screen exists for; storefront headlines."
+   },
+   "display-mobile": {
+    "displayName": "Display (mobile)",
+    "purpose": "Page titles under 768px."
+   },
+   "figure-sm": {
+    "displayName": "Figure small",
+    "purpose": "Secondary prices and numbers."
+   },
+   "brand": {
+    "displayName": "Brand",
+    "purpose": "saka and shop wordmarks."
+   },
+   "lede": {
+    "displayName": "Lede",
+    "purpose": "Sentence under a page title; storefront copy."
+   },
+   "micro": {
+    "displayName": "Micro",
+    "purpose": "Chart labels and the phone tab bar."
    }
   },
   "shadows": [],
@@ -397,6 +421,11 @@
     "name": "No kickers",
     "body": "No eyebrow labels above titles; context lives in the sentence under the title.",
     "section": "typography"
+   },
+   {
+    "name": "Ask before the irreversible",
+    "body": "Irreversible actions confirm inline with the safe choice focused; approve buttons lock once PayPal accepts.",
+    "section": "components"
    }
   ],
   "dos": [

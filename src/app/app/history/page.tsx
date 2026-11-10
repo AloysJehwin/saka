@@ -25,7 +25,7 @@ export default function HistoryPage() {
       <Section title={`${product?.description ?? code}: past price changes`} aside="Each change compared with products whose price stayed put (difference in differences)">
         {events.length === 0 ? (
           <div className="border border-dashed border-rule-2 p-6">
-            <p className="text-[15px] font-semibold">This product kept one price for the whole history.</p>
+            <p className="text-[16px] font-semibold">This product kept one price for the whole history.</p>
             <p className="mt-2 max-w-[65ch] text-[14px] leading-relaxed text-ink-2">So its sales say nothing about how buyers react to a price change. saka falls back to how typical gift-shop products react, which is why its range is wide. Pick the Jumbo Bag Red White Spotty to see a product that did change price.</p>
           </div>
         ) : (
@@ -67,7 +67,7 @@ function EventRow({ ev, compact }: { ev: Ev; compact?: boolean }) {
     <div className="grid grid-cols-1 gap-x-8 gap-y-3 border-t border-rule py-4 lg:grid-cols-[260px_1fr_220px]">
       <div>
         {compact && <p className="text-[13px] font-semibold">{ev.description}</p>}
-        <p className={`${compact ? "text-[13px]" : "text-[15px] font-semibold"} num`}>{gbp(ev.from)} → {gbp(ev.to)} <span className="font-normal text-ink-3">({pct(ev.pctChange, 1)})</span></p>
+        <p className={`${compact ? "text-[13px]" : "text-[16px] font-semibold"} num`}>{gbp(ev.from)} → {gbp(ev.to)} <span className="font-normal text-ink-3">({pct(ev.pctChange, 1)})</span></p>
         <p className="text-[13px] text-ink-2">Week of {dateShort(ev.weekStart)}</p>
         {!compact && ev.family && ev.family.length > 1 && <p className="mt-1 text-[12px] text-ink-3">Changed with {ev.family.length - 1} other products the same week</p>}
       </div>

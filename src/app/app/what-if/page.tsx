@@ -68,7 +68,7 @@ function WhatIf({ o }: { o: Overview }) {
             <Field label="New price per unit" className="w-[180px]">
               <MoneyInput ariaLabel="New price" value={price} onChange={setPrice} />
             </Field>
-            <p className="pb-2 text-[15px] num">
+            <p className="pb-2 text-[16px] num">
               <span className={`font-semibold ${change > 0 ? "text-red-ink" : change < 0 ? "text-ink" : "text-ink-3"}`}>{pct(change, 1)}</span>
               <span className="text-ink-3"> against today&apos;s {gbp(p0)}</span>
             </p>
@@ -94,15 +94,26 @@ function WhatIf({ o }: { o: Overview }) {
       {fcError && <div className="mt-6"><ErrorNote>{fcError}</ErrorNote></div>}
       {!fc ? <Loading label="Forecasting" /> : (
         <>
-          <div className="grid grid-cols-1 gap-x-10 border-b border-rule md:grid-cols-2 xl:grid-cols-4">
-            <Figure label="Profit a month after PayPal fees" band={fc.profit} format={gbp0} />
-            <Figure label="Revenue a month" band={fc.revenue} format={gbp0} />
-            <Figure label="Units a month" band={fc.units} format={int} />
-            <div className="py-6">
+          <div className="grid grid-cols-1 items-end gap-x-12 gap-y-6 border-b border-rule py-8 lg:grid-cols-[minmax(0,2.2fr)_minmax(0,1fr)]">
+            <div>
+              <h2 className="text-[17px] font-semibold tracking-[-0.01em]">Profit a month after PayPal fees</h2>
+              <p className="mt-1 text-[14px] text-ink-2 num">
+                Likely <b className="text-ink">{gbp0(fc.profit.p50)}</b>, {signedGbp0(fc.profit.p50 - fc.profit.base)} against today&apos;s {gbp0(fc.profit.base)}.
+                {" "}80% sure it lands between {gbp0(fc.profit.p10)} and {gbp0(fc.profit.p90)}.
+              </p>
+              <div className="mt-5">
+                <RangeBar low={fc.profit.p10} mid={fc.profit.p50} high={fc.profit.p90} base={fc.profit.base} domain={domainFor([fc.profit.p10, fc.profit.p90, fc.profit.base], 0.2)} format={gbp0} label="Profit a month after PayPal fees" />
+              </div>
+            </div>
+            <div className="lg:border-l lg:border-rule lg:pl-8">
               <p className="text-[13px] text-ink-2">Chance profit goes up</p>
               <p className={`mt-2 text-[56px] font-bold leading-none tracking-[-0.04em] num ${fc.probProfitUp >= 0.5 ? "text-ink" : "text-red-ink"}`}>{pctPlain(fc.probProfitUp)}</p>
               <p className="mt-2 text-[12px] text-ink-3">Revenue goes up: {pctPlain(fc.probRevenueUp)}</p>
             </div>
+          </div>
+          <div className="grid grid-cols-1 gap-x-12 border-b border-rule md:grid-cols-2">
+            <Figure label="Revenue a month" band={fc.revenue} format={gbp0} />
+            <Figure label="Units a month" band={fc.units} format={int} />
           </div>
 
           <Section className="mt-10" title="Who keeps buying" aside={`At ${gbp(fc.newPrice)} for one month`}>
@@ -120,13 +131,13 @@ function WhatIf({ o }: { o: Overview }) {
           {voices.busy && <Loading label="Claude is writing each group's reaction" />}
           {voices.data && (
             <div>
-              <p className="text-[18px] font-semibold leading-snug tracking-[-0.01em]">{voices.data.headline}</p>
+              <p className="text-[17px] font-semibold leading-snug tracking-[-0.01em]">{voices.data.headline}</p>
               <ul className="mt-5 divide-y divide-rule border-y border-rule">
                 {voices.data.segments.map((s) => (
                   <li key={s.segment} className="grid grid-cols-1 gap-2 py-4 md:grid-cols-[150px_1fr]">
                     <p className="font-semibold">{fc?.groups.find((g) => g.id === s.segment)?.name ?? s.segment}</p>
                     <div>
-                      {s.reactions.map((r) => <p key={r} className="text-[15px] leading-relaxed">&ldquo;{r}&rdquo;</p>)}
+                      {s.reactions.map((r) => <p key={r} className="text-[16px] leading-relaxed">&ldquo;{r}&rdquo;</p>)}
                       <p className="mt-1 text-[13px] text-ink-3">{s.why}</p>
                     </div>
                   </li>
@@ -148,7 +159,7 @@ function WhatIf({ o }: { o: Overview }) {
           {advice.busy && <Loading label="Claude is reading your PayPal data" />}
           {advice.data && (
             <div>
-              <p className="text-[15px] leading-relaxed">{advice.data.summary}</p>
+              <p className="text-[16px] leading-relaxed">{advice.data.summary}</p>
               {advice.data.paypalToolsUsed.length > 0 && (
                 <p className="mt-3 flex flex-wrap items-center gap-2 text-[12px] text-ink-3">
                   Read from PayPal:{advice.data.paypalToolsUsed.map((t) => <code key={t} className="border border-rule-2 px-1.5 py-0.5 font-mono text-[11px] text-ink-2">{t}</code>)}
@@ -165,6 +176,8 @@ function WhatIf({ o }: { o: Overview }) {
     </>
   );
 }
+
+const signedGbp0 = (n: number) => `${n >= 0 ? "+" : "−"}${gbp0(Math.abs(n))}`;
 
 function Figure({ label, band, format }: { label: string; band: Forecast["profit"]; format: (n: number) => string }) {
   return (

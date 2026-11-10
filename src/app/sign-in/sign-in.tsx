@@ -32,9 +32,9 @@ export function SignIn() {
   return (
     <div className="grid min-h-dvh grid-cols-1 lg:grid-cols-[1.15fr_1fr]">
       <section className="flex flex-col justify-between bg-rail px-6 py-8 text-rail-ink md:px-14 md:py-12">
-        <p className="text-[24px] font-bold tracking-[-0.04em]">saka <span className="text-[13px] font-normal tracking-normal text-rail-ink-2">PriceTwin</span></p>
+        <p className="text-[22px] font-bold tracking-[-0.04em]">saka <span className="text-[13px] font-normal tracking-normal text-rail-ink-2">PriceTwin</span></p>
         <div className="my-12 max-w-[640px]">
-          <h1 className="text-balance text-[40px] font-bold leading-[1.02] tracking-[-0.035em] md:text-[60px]">Test a new price on real PayPal checkouts before you risk your customers.</h1>
+          <h1 className="text-balance text-[40px] font-bold leading-[1.02] tracking-[-0.035em] md:text-[56px]">Test a new price on real PayPal checkouts before you risk your customers.</h1>
           <p className="mt-6 max-w-[56ch] text-[16px] leading-relaxed text-rail-ink-2">
             saka learns your customer groups from your sales, shows the honest range of what a price change could do to profit after PayPal fees,
             then tests it on a slice of real checkouts. The range shrinks with every purchase, and the test stops itself if the new price is losing.

@@ -20,6 +20,12 @@ colors:
   rail-ink-2: "#a8a8a2"
   rail-rule: "#2c2c2a"
 typography:
+  hero:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "56px"
+    fontWeight: 700
+    lineHeight: 1
+    letterSpacing: "-0.04em"
   display:
     fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
     fontSize: "40px"
@@ -32,12 +38,35 @@ typography:
     fontWeight: 700
     lineHeight: 1
     letterSpacing: "-0.03em"
+  display-mobile:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "32px"
+    fontWeight: 700
+    lineHeight: 1.05
+    letterSpacing: "-0.03em"
+  figure-sm:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "28px"
+    fontWeight: 700
+    lineHeight: 1
+    letterSpacing: "-0.03em"
+  brand:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "22px"
+    fontWeight: 700
+    lineHeight: 1.1
+    letterSpacing: "-0.04em"
   section:
     fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
     fontSize: "17px"
     fontWeight: 600
     lineHeight: 1.3
     letterSpacing: "-0.01em"
+  lede:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "16px"
+    fontWeight: 400
+    lineHeight: 1.55
   body:
     fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
     fontSize: "14px"
@@ -53,6 +82,11 @@ typography:
     fontSize: "12px"
     fontWeight: 400
     lineHeight: 1.4
+  micro:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "11px"
+    fontWeight: 500
+    lineHeight: 1.3
   code:
     fontFamily: "Geist Mono, ui-monospace, monospace"
     fontSize: "12px"
@@ -135,10 +169,14 @@ Motion is stepped, never eased: state changes move in two frames over 90ms. Char
 Geist for everything, Geist Mono only for identifiers (PayPal order and plan ids, item codes). All figures use tabular numerals so they line up on the decimal.
 
 ### Hierarchy
-- **Display** 32px on mobile, 40px desktop, bold, tight tracking: page titles only.
-- **Figure** 40px bold: headline numbers (units a week, chance profit goes up).
+Eleven steps, no others: 11 · 12 · 13 · 14 · 16 · 17 · 22 · 28 · 32 · 40 · 56.
+- **Hero** 56px bold: the one figure a screen exists for (chance profit goes up) and storefront headlines.
+- **Display** 32px on mobile, 40px desktop, bold, tight tracking: page titles.
+- **Figure** 40px and **figure-sm** 28px bold: headline numbers and prices.
+- **Brand** 22px bold: the saka and shop wordmarks.
 - **Section** 17px semibold: section titles, set under the ink rule.
-- **Body** 14px; **label** 13px medium for field labels; **note** 12px for sources and assumptions.
+- **Lede** 16px: the sentence under a page title, storefront copy.
+- **Body** 14px; **label** 13px medium for field labels; **note** 12px for sources and assumptions; **micro** 11px for chart labels and the phone tab bar.
 
 ### Named Rules
 - **No kickers.** No eyebrow labels above titles; context goes in the sentence under them.
@@ -146,7 +184,7 @@ Geist for everything, Geist Mono only for identifiers (PayPal order and plan ids
 
 ## Layout
 
-A left rail (220px, ink) holds navigation and the signed-in user; it becomes a horizontal scrolling bar under 1024px. A sticky product bar sits above every app screen. Content runs flush left with a 68ch measure for prose. Grids collapse to one column below `md` (768px); KPI rows go 1 → 2 → 4 columns. Wide tables scroll horizontally inside their section rather than squeezing.
+A left rail (232px, ink) holds navigation and the signed-in user. Under 768px it becomes a five-tab bar (icon over a one-word label, 56px tall) with the club link and sign-out beside the wordmark, and it scrolls away with the page; only the product bar stays pinned. Touch targets are 44px on coarse pointers. A sticky product bar sits above every app screen. Content runs flush left with a 68ch measure for prose. Grids collapse to one column below `md` (768px); KPI rows go 1 → 2 → 4 columns. Wide tables scroll horizontally inside their section rather than squeezing.
 
 ## Elevation & Depth
 
@@ -166,6 +204,9 @@ Every PayPal write is an approve action: a plain sentence saying exactly what wi
 
 ### Range bar
 Large form for headline forecasts, small form inside tables. Marks such as "no change" are dashed vertical lines; their labels hide rather than collide with the range labels.
+
+### Guarded actions
+Anything that can't be undone asks first, inline: a red-bordered sentence saying what will happen, the danger button, and "Keep running" (or equivalent) focused by default. Approve buttons lock to "Approved" once PayPal accepts, with "Make another change" to start over, so a second click never repeats a write. Errors appear next to the action that caused them.
 
 ### Status
 A 24px outlined tag with a square dot: Testing (amber), Ready (green), Stopped (red), Done (ink). Stopped items elsewhere are struck through, not deleted, so the record stays complete.

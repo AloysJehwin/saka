@@ -46,7 +46,8 @@
 }
 
 @layer base {
-  html { background: var(--paper); color: var(--ink); color-scheme: light; }
+  html { background: var(--paper); color: var(--ink); color-scheme: light; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  p, li, td { text-wrap: pretty; }
   body { font-family: var(--font-sans); font-size: 14px; line-height: 1.5; font-feature-settings: "ss01", "cv11"; }
 
   /* Figures line up on the decimal everywhere. */
