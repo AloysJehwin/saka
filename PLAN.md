@@ -167,7 +167,7 @@ This answers the known weakness of pure AI "synthetic customers": they are not a
 | Apply | New price for new customers | `POST /v1/catalogs/products`, `POST /v1/billing/plans` |
 | Apply | Intro offer | Plan with up to two priced `TRIAL` billing cycles |
 | Apply | Consent-first switch | `POST /v1/billing/subscriptions/{id}/revise` returns an approval link |
-| Apply | Plan-wide price | `POST /v1/billing/plans/{id}/update-pricing-schemes` |
+| Apply | Plan-wide price (optional) | `POST /v1/billing/plans/{id}/update-pricing-schemes`, currently rejected in our sandbox, see section 13 |
 | Protect | Refunds and disputes | Webhooks `PAYMENT.CAPTURE.REFUNDED`, `CUSTOMER.DISPUTE.CREATED`; toolkit `list_disputes` |
 | All | Security | `POST /v1/notifications/verify-webhook-signature`; `PayPal-Request-Id` idempotency on writes |
 
@@ -189,7 +189,7 @@ This answers the known weakness of pure AI "synthetic customers": they are not a
 
 **Day 1, Tue 10 Nov (India evening)**
 - [x] Repo, plan, scaffold, dependencies.
-- [x] Import real history; verify price changes exist (done: Jumbo Bag £1.65 to £1.79).
+- [x] Import real history; verify price changes exist (done: Jumbo Bag jumbo bag family £1.95 to £2.08 on 2011-04-04).
 - [x] Engine: weekly series, change detection, segments, elasticity with shrinkage, Monte Carlo, difference-in-differences, Bayesian canary, 10 unit tests.
 - [x] PayPal REST client (orders, products, plans, intro offers, price update, revise, reporting, webhook verification).
 - [x] Agent Toolkit bridge: in-process MCP server exposing 10 read-only PayPal tools to Claude (verified).
@@ -197,7 +197,7 @@ This answers the known weakness of pure AI "synthetic customers": they are not a
 - [ ] Sandbox seeding script and first live calls (needs your PayPal sandbox keys).
 
 **Day 2, Wed 11 Nov**
-- [ ] UI: shop overview, backtest screen, what-if slider, AG Grid twins table.
+- [ ] UI: shop overview, history check, what-if slider, AG Grid twins table.
 - [ ] Claude segment reactions and advisor proposals.
 - [ ] Canary: checkout buttons with assigned price, webhooks, stop rule.
 - [ ] Apply: new plan, intro offer, consent-first switch link.
@@ -259,3 +259,10 @@ This answers the known weakness of pure AI "synthetic customers": they are not a
 - Counting retail-sized orders instead of units reduced, but did not remove, the noise.
 - Conclusion: a "replay the past price rise" demo would mislead. saka shows history as a wide, honest prior and
   uses the PayPal price canary as the evidence that narrows it.
+
+**10 Nov 2026: live sandbox smoke test (`scripts/smoke-live.ts`).**
+- Working: OAuth, Orders v2 (GBP), Catalog products, plans with a priced trial cycle, Transaction search,
+  Agent Toolkit over in-process MCP (`list_subscription_plans`, `list_transactions` return real sandbox data).
+- `update-pricing-schemes` returns 422 `PRICING_SCHEME_UPDATE_NOT_ALLOWED` for every plan we tried, with or
+  without a trial cycle. Others report the same sandbox error with no published fix. saka therefore applies
+  new prices through a new plan for new customers and a consent-first `revise` for existing subscribers.

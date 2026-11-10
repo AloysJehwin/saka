@@ -12,7 +12,10 @@ export const MODEL = "claude-opus-5-5";
 const FALLBACK = { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" as const };
 
 let client: Anthropic | null = null;
-const claude = () => (client ??= new Anthropic());
+// Keys that are not scoped to a workspace must name one on every request.
+const claude = () => (client ??= new Anthropic(
+  process.env.ANTHROPIC_WORKSPACE_ID ? { defaultHeaders: { "anthropic-workspace-id": process.env.ANTHROPIC_WORKSPACE_ID } } : {},
+));
 
 // ---------------------------------------------------------------------------------------------
 // Segment voices
