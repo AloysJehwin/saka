@@ -189,7 +189,7 @@ This answers the known weakness of pure AI "synthetic customers": they are not a
 
 **Day 1, Tue 10 Nov (India evening)**
 - [x] Repo, plan, scaffold, dependencies.
-- [x] Import real history; verify price changes exist (done: Jumbo Bag jumbo bag family £1.95 to £2.08 on 2011-04-04).
+- [x] Import real history; verify price changes exist (done: jumbo bag family £1.95 to £2.08 on 2011-04-04).
 - [x] Engine: weekly series, change detection, segments, elasticity with shrinkage, Monte Carlo, difference-in-differences, Bayesian canary, 10 unit tests.
 - [x] PayPal REST client (orders, products, plans, intro offers, price update, revise, reporting, webhook verification).
 - [x] Agent Toolkit bridge: in-process MCP server exposing 10 read-only PayPal tools to Claude (verified).
