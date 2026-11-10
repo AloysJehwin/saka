@@ -78,7 +78,7 @@ export type Product = { id: string; name: string };
 export const createProduct = (p: { name: string; description?: string; type?: "PHYSICAL" | "DIGITAL" | "SERVICE" }) =>
   paypal<Product>("/v1/catalogs/products", { method: "POST", body: { name: p.name, description: p.description, type: p.type ?? "PHYSICAL" } });
 
-export type Plan = { id: string; product_id: string; name: string; status: string; billing_cycles: { tenure_type: string; sequence: number; pricing_scheme: { fixed_price: Money } }[] };
+export type Plan = { id: string; product_id: string; name: string; status: string; billing_cycles: { tenure_type: string; sequence: number; total_cycles?: number; pricing_scheme: { fixed_price: Money } }[] };
 
 /** Monthly plan, optionally with a priced intro (trial) period. PayPal allows up to two trial cycles. */
 export function createPlan(p: { productId: string; name: string; description?: string; monthlyPrice: number; currency: string; intro?: { price: number; months: number } }) {

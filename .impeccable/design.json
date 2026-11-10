@@ -1,0 +1,415 @@
+{
+ "schemaVersion": 2,
+ "generatedAt": "2026-11-10T09:33:41.819941Z",
+ "title": "Design System: saka",
+ "extensions": {
+  "colorMeta": {
+   "paper": {
+    "role": "neutral",
+    "displayName": "Paper",
+    "canonical": "#fafaf8",
+    "tonalRamp": [
+     "#4b4b4a",
+     "#7d7d7c",
+     "#afafae",
+     "#fafaf8",
+     "#fcfcfa",
+     "#fdfdfc",
+     "#fefefd",
+     "#fefefe"
+    ]
+   },
+   "sheet": {
+    "role": "neutral",
+    "displayName": "Sheet",
+    "canonical": "#ffffff",
+    "tonalRamp": [
+     "#4d4d4d",
+     "#808080",
+     "#b2b2b2",
+     "#ffffff",
+     "#ffffff",
+     "#ffffff",
+     "#ffffff",
+     "#ffffff"
+    ]
+   },
+   "ink": {
+    "role": "primary",
+    "displayName": "Ink",
+    "canonical": "#111111",
+    "tonalRamp": [
+     "#050505",
+     "#080808",
+     "#0c0c0c",
+     "#111111",
+     "#585858",
+     "#949494",
+     "#c4c4c4",
+     "#e7e7e7"
+    ]
+   },
+   "ink-2": {
+    "role": "neutral",
+    "displayName": "Ink 2",
+    "canonical": "#474744",
+    "tonalRamp": [
+     "#151514",
+     "#242422",
+     "#323230",
+     "#474744",
+     "#7e7e7c",
+     "#acacab",
+     "#d1d1d0",
+     "#ededec"
+    ]
+   },
+   "ink-3": {
+    "role": "neutral",
+    "displayName": "Ink 3",
+    "canonical": "#6b6b67",
+    "tonalRamp": [
+     "#20201f",
+     "#363634",
+     "#4b4b48",
+     "#6b6b67",
+     "#979795",
+     "#bcbcbb",
+     "#dadad9",
+     "#f0f0f0"
+    ]
+   },
+   "rule": {
+    "role": "neutral",
+    "displayName": "Rule",
+    "canonical": "#deded9",
+    "tonalRamp": [
+     "#434341",
+     "#6f6f6c",
+     "#9b9b98",
+     "#deded9",
+     "#e8e8e4",
+     "#f0f0ee",
+     "#f7f7f6",
+     "#fcfcfb"
+    ]
+   },
+   "rule-2": {
+    "role": "neutral",
+    "displayName": "Rule 2",
+    "canonical": "#c9c9c3",
+    "tonalRamp": [
+     "#3c3c3b",
+     "#646462",
+     "#8d8d88",
+     "#c9c9c3",
+     "#d9d9d5",
+     "#e7e7e4",
+     "#f2f2f0",
+     "#fafaf9"
+    ]
+   },
+   "ghost": {
+    "role": "neutral",
+    "displayName": "Ghost",
+    "canonical": "#bdbdb7",
+    "tonalRamp": [
+     "#393937",
+     "#5e5e5c",
+     "#848480",
+     "#bdbdb7",
+     "#d1d1cd",
+     "#e1e1df",
+     "#eeeeed",
+     "#f8f8f8"
+    ]
+   },
+   "wash": {
+    "role": "neutral",
+    "displayName": "Wash",
+    "canonical": "#efefeb",
+    "tonalRamp": [
+     "#484847",
+     "#787876",
+     "#a7a7a4",
+     "#efefeb",
+     "#f4f4f1",
+     "#f8f8f6",
+     "#fbfbfa",
+     "#fdfdfd"
+    ]
+   },
+   "signal-red": {
+    "role": "accent",
+    "displayName": "Signal Red",
+    "canonical": "#e1001f",
+    "tonalRamp": [
+     "#440009",
+     "#700010",
+     "#9e0016",
+     "#e1001f",
+     "#ea4c62",
+     "#f28c9a",
+     "#f8bfc7",
+     "#fce6e9"
+    ]
+   },
+   "red-ink": {
+    "role": "accent",
+    "displayName": "Red Ink",
+    "canonical": "#b80019",
+    "tonalRamp": [
+     "#370008",
+     "#5c000c",
+     "#810012",
+     "#b80019",
+     "#cd4c5e",
+     "#df8c98",
+     "#edbfc6",
+     "#f8e6e8"
+    ]
+   },
+   "green": {
+    "role": "state",
+    "displayName": "Ready Green",
+    "canonical": "#0b7a3b",
+    "tonalRamp": [
+     "#032512",
+     "#063d1e",
+     "#085529",
+     "#0b7a3b",
+     "#54a276",
+     "#91c3a7",
+     "#c2dece",
+     "#e7f2eb"
+    ]
+   },
+   "amber": {
+    "role": "state",
+    "displayName": "Testing Amber",
+    "canonical": "#a65600",
+    "tonalRamp": [
+     "#321a00",
+     "#532b00",
+     "#743c00",
+     "#a65600",
+     "#c1894c",
+     "#d7b38c",
+     "#e9d5bf",
+     "#f6eee6"
+    ]
+   },
+   "rail": {
+    "role": "neutral",
+    "displayName": "Rail",
+    "canonical": "#111111",
+    "tonalRamp": [
+     "#050505",
+     "#080808",
+     "#0c0c0c",
+     "#111111",
+     "#585858",
+     "#949494",
+     "#c4c4c4",
+     "#e7e7e7"
+    ]
+   },
+   "rail-ink": {
+    "role": "neutral",
+    "displayName": "Rail Ink",
+    "canonical": "#f4f4f1",
+    "tonalRamp": [
+     "#494948",
+     "#7a7a78",
+     "#ababa9",
+     "#f4f4f1",
+     "#f7f7f5",
+     "#fafaf9",
+     "#fcfcfc",
+     "#fefefe"
+    ]
+   },
+   "rail-ink-2": {
+    "role": "neutral",
+    "displayName": "Rail Ink 2",
+    "canonical": "#a8a8a2",
+    "tonalRamp": [
+     "#323231",
+     "#545451",
+     "#767671",
+     "#a8a8a2",
+     "#c2c2be",
+     "#d8d8d5",
+     "#e9e9e8",
+     "#f6f6f6"
+    ]
+   },
+   "rail-rule": {
+    "role": "neutral",
+    "displayName": "Rail Rule",
+    "canonical": "#2c2c2a",
+    "tonalRamp": [
+     "#0d0d0d",
+     "#161615",
+     "#1f1f1d",
+     "#2c2c2a",
+     "#6b6b6a",
+     "#a0a09f",
+     "#cacaca",
+     "#eaeaea"
+    ]
+   }
+  },
+  "typographyMeta": {
+   "display": {
+    "displayName": "Display",
+    "purpose": "Page titles; 32px mobile, 40px desktop."
+   },
+   "figure": {
+    "displayName": "Figure",
+    "purpose": "Headline numbers, tabular."
+   },
+   "section": {
+    "displayName": "Section",
+    "purpose": "Section titles under the ink rule."
+   },
+   "body": {
+    "displayName": "Body",
+    "purpose": "Running text and table cells."
+   },
+   "label": {
+    "displayName": "Label",
+    "purpose": "Field labels and secondary lines."
+   },
+   "note": {
+    "displayName": "Note",
+    "purpose": "Sources, assumptions, range labels."
+   },
+   "code": {
+    "displayName": "Code",
+    "purpose": "PayPal ids and item codes only."
+   }
+  },
+  "shadows": [],
+  "motion": [
+   {
+    "name": "step",
+    "value": "90ms steps(2, end)",
+    "purpose": "Every state change: bar positions, button fills. Disabled under prefers-reduced-motion."
+   }
+  ],
+  "breakpoints": [
+   {
+    "name": "md",
+    "value": "768px"
+   },
+   {
+    "name": "lg",
+    "value": "1024px"
+   },
+   {
+    "name": "xl",
+    "value": "1280px"
+   }
+  ]
+ },
+ "components": [
+  {
+   "name": "Primary Button",
+   "kind": "button",
+   "refersTo": "button-primary",
+   "description": "The one main action on a screen; approve actions use it.",
+   "html": "<button class=\"ds-btn-primary\">Approve</button>",
+   "css": ".ds-btn-primary{display:inline-flex;align-items:center;height:40px;padding:0 16px;background:var(--ink,#111);color:var(--paper,#fafaf8);font:500 14px Geist,system-ui,sans-serif;border:0;border-radius:0;cursor:pointer;transition:background-color 90ms steps(2,end)}.ds-btn-primary:hover{background:var(--red,#e1001f)}.ds-btn-primary:focus-visible{outline:2px solid var(--red,#e1001f);outline-offset:2px}"
+  },
+  {
+   "name": "Secondary Button",
+   "kind": "button",
+   "refersTo": "button-secondary",
+   "description": "Supporting actions: open storefront, copy link.",
+   "html": "<button class=\"ds-btn-secondary\">Open storefront</button>",
+   "css": ".ds-btn-secondary{display:inline-flex;align-items:center;height:40px;padding:0 16px;background:transparent;color:var(--ink,#111);font:500 14px Geist,system-ui,sans-serif;border:1px solid var(--ink,#111);border-radius:0;cursor:pointer;transition:background-color 90ms steps(2,end),color 90ms steps(2,end)}.ds-btn-secondary:hover{background:var(--ink,#111);color:var(--paper,#fafaf8)}.ds-btn-secondary:focus-visible{outline:2px solid var(--red,#e1001f);outline-offset:2px}"
+  },
+  {
+   "name": "Danger Button",
+   "kind": "button",
+   "refersTo": "button-danger",
+   "description": "Stopping a test or undoing a rollout.",
+   "html": "<button class=\"ds-btn-danger\">Stop test</button>",
+   "css": ".ds-btn-danger{display:inline-flex;align-items:center;height:40px;padding:0 16px;background:transparent;color:var(--red-ink,#b80019);font:500 14px Geist,system-ui,sans-serif;border:1px solid var(--red,#e1001f);border-radius:0;cursor:pointer}.ds-btn-danger:hover{background:var(--red,#e1001f);color:#fff}.ds-btn-danger:focus-visible{outline:2px solid var(--red,#e1001f);outline-offset:2px}"
+  },
+  {
+   "name": "Money Input",
+   "kind": "input",
+   "refersTo": "input",
+   "description": "Price and cost fields with a pound prefix.",
+   "html": "<label class=\"ds-field\"><span>New price per unit</span><span class=\"ds-money\"><i>\u00a3</i><input value=\"2.29\"></span></label>",
+   "css": ".ds-field{display:flex;flex-direction:column;gap:6px;font:500 13px Geist,system-ui,sans-serif;color:var(--ink-2,#474744)}.ds-money{position:relative;display:block}.ds-money i{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-style:normal;color:var(--ink-3,#6b6b67)}.ds-money input{height:40px;width:160px;padding:0 12px 0 28px;border:1px solid var(--rule-2,#c9c9c3);background:#fff;color:var(--ink,#111);font:400 14px Geist,system-ui,sans-serif;font-variant-numeric:tabular-nums;border-radius:0}.ds-money input:hover{border-color:var(--ink-3,#6b6b67)}.ds-money input:focus{outline:none;border-color:var(--ink,#111)}"
+  },
+  {
+   "name": "Range Bar",
+   "kind": "custom",
+   "refersTo": "range-bar",
+   "description": "The signature: low-to-high ink bar, red likely tick, hollow today tick, fading earlier ranges.",
+   "html": "<div class=\"ds-range\"><b class=\"ds-mid-label\">\u00a35,411</b><div class=\"ds-axis\"></div><div class=\"ds-bar\"></div><div class=\"ds-g1\"></div><div class=\"ds-g2\"></div><div class=\"ds-base\"></div><div class=\"ds-mid\"></div><span class=\"ds-lo\">\u00a35,098</span><span class=\"ds-hi\">\u00a35,739</span></div>",
+   "css": ".ds-range{position:relative;height:76px;width:320px;font:400 12px Geist,system-ui,sans-serif;font-variant-numeric:tabular-nums}.ds-axis{position:absolute;left:0;right:0;top:30px;height:1px;background:var(--rule-2,#c9c9c3)}.ds-bar{position:absolute;top:26px;height:9px;left:20%;width:62%;background:var(--ink,#111)}.ds-g1,.ds-g2{position:absolute;height:1px;background:var(--ghost,#bdbdb7)}.ds-g1{top:41px;left:8%;width:84%;opacity:.5}.ds-g2{top:38px;left:14%;width:72%;opacity:1}.ds-base{position:absolute;top:22px;height:17px;width:7px;left:12%;transform:translateX(-50%);border:2px solid var(--ink,#111);background:#fff;box-sizing:border-box}.ds-mid{position:absolute;top:20px;height:21px;width:3px;left:48%;transform:translateX(-50%);background:var(--red,#e1001f)}.ds-mid-label{position:absolute;top:0;left:48%;transform:translateX(-50%);font-size:13px;font-weight:600;color:var(--red-ink,#b80019)}.ds-lo,.ds-hi{position:absolute;top:54px;transform:translateX(-50%);color:var(--ink-3,#6b6b67)}.ds-lo{left:20%}.ds-hi{left:82%}"
+  },
+  {
+   "name": "Status Tag",
+   "kind": "chip",
+   "refersTo": "status",
+   "description": "Test state as an outlined tag with a square dot.",
+   "html": "<span class=\"ds-status\"><i></i>Testing</span>",
+   "css": ".ds-status{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 8px;border:1px solid var(--amber,#a65600);color:var(--amber,#a65600);font:600 12px Geist,system-ui,sans-serif}.ds-status i{width:6px;height:6px;background:currentColor}"
+  },
+  {
+   "name": "Nav Rail",
+   "kind": "nav",
+   "refersTo": "nav-rail",
+   "description": "Dark left rail with the five steps; active item inverts.",
+   "html": "<nav class=\"ds-rail\"><b>saka</b><a class=\"on\">Overview</a><a>History check</a><a>What-if</a><a>Price test</a><a>Apply</a></nav>",
+   "css": ".ds-rail{display:flex;flex-direction:column;width:200px;padding:16px;gap:2px;background:var(--rail,#111);color:var(--rail-ink,#f4f4f1);font:500 14px Geist,system-ui,sans-serif}.ds-rail b{font-size:20px;letter-spacing:-.03em;margin-bottom:16px}.ds-rail a{padding:8px 10px;color:var(--rail-ink-2,#a8a8a2);cursor:pointer}.ds-rail a:hover{color:var(--rail-ink,#f4f4f1)}.ds-rail a.on{background:var(--rail-ink,#f4f4f1);color:var(--rail,#111)}"
+  }
+ ],
+ "narrative": {
+  "northStar": "A price is a range, not a number",
+  "overview": "saka is a Swiss-grid working screen: ink on paper, hairline rules, square shapes, one signal red. Every forecast is a range bar whose red tick is the likely value; earlier ranges stay as fading lines so the seller sees uncertainty narrow. Motion steps in two frames; charts step week by week.",
+  "keyCharacteristics": [
+   "Range bar on every forecast",
+   "One red for likely value and test price",
+   "Hairlines instead of cards",
+   "Stepped motion and stepped charts",
+   "Tabular figures everywhere",
+   "PayPal refusals shown verbatim"
+  ],
+  "rules": [
+   {
+    "name": "The One Red Rule",
+    "body": "Red marks the likely value and the price under test. Nothing decorative is red.",
+    "section": "colors"
+   },
+   {
+    "name": "Hairlines, not boxes",
+    "body": "Sections open with a 1px ink rule; rows split with 1px rule. No cards, no shadows.",
+    "section": "elevation"
+   },
+   {
+    "name": "No kickers",
+    "body": "No eyebrow labels above titles; context lives in the sentence under the title.",
+    "section": "typography"
+   }
+  ],
+  "dos": [
+   "Draw every forecast as a range bar",
+   "Keep earlier ranges visible as ghosts",
+   "Quote PayPal's refusal inline",
+   "Label simulated shoppers separately"
+  ],
+  "donts": [
+   "Rounded corners, shadows, gradients or blur",
+   "Eased motion",
+   "Smooth curves for sales data",
+   "Eyebrow labels, emoji icons, thick coloured left borders"
+  ]
+ }
+}

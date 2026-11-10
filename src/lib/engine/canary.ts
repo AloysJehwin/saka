@@ -6,9 +6,9 @@ import { unitProfit, DEFAULT_FEE, type FeeModel } from "./forecast";
  *
  * Prior: the elasticity learned from history (wide when history is uninformative).
  * Data: offer views and PayPal-captured purchases for the control price and the test price.
- * Posterior: importance-weighted draws. For each draw, elasticity e comes from the prior and the control
+ * Posterior: importance-weighted draws. For each draw, elasticity e comes from a widened prior and the control
  * conversion rate q0 from its Beta posterior; the test conversion rate is implied as q1 = q0 * (p1/p0)^e,
- * and the draw is weighted by the binomial likelihood of the observed test purchases.
+ * and the draw is weighted by the binomial likelihood of the observed test purchases times prior / proposal density.
  */
 export type CanaryArm = { price: number; views: number; purchases: number };
 export type CanaryInput = {
@@ -57,12 +57,17 @@ export function evaluateCanary(input: CanaryInput, minViewsPerArm = 60): CanaryR
   const m0 = unitProfit(control.price, unitCost, upo, fee), m1 = unitProfit(test.price, unitCost, upo, fee);
 
   const es: number[] = [], ws: number[] = [], changes: number[] = [];
+  // Draw elasticity from a proposal three times wider than the prior and reweight by prior / proposal,
+  // so buyer reactions far from what history suggests still get enough draws to be found.
+  const spread = 3;
+  const logPrior = (e: number) => -0.5 * ((e - prior.mean) / prior.sd) ** 2;
+  const logProposal = (e: number) => -0.5 * ((e - prior.mean) / (prior.sd * spread)) ** 2 - Math.log(spread);
   for (let i = 0; i < n; i++) {
-    const e = normal(prior.mean, prior.sd);
+    const e = normal(prior.mean, prior.sd * spread);
     const a = gamma(control.purchases + 1), b = gamma(control.views - control.purchases + 1);
     const q0 = a / (a + b);
     const q1 = Math.min(0.999, Math.max(1e-6, q0 * Math.pow(ratio, e)));
-    const logw = test.purchases * Math.log(q1) + (test.views - test.purchases) * Math.log(1 - q1);
+    const logw = test.purchases * Math.log(q1) + (test.views - test.purchases) * Math.log(1 - q1) + logPrior(e) - logProposal(e);
     es.push(e); ws.push(logw);
     changes.push((q1 * m1) / (q0 * m0) - 1);
   }

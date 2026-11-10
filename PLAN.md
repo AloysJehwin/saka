@@ -53,14 +53,14 @@ saka tests on real PayPal checkouts before rolling out.
 ## 3. Scope
 
 **Must have (submission)**
-- [ ] Import real history (UCI, CC BY 4.0) and pull live PayPal sandbox data.
-- [ ] Segment customers and fit price sensitivity per product and segment, with uncertainty.
-- [ ] History check: past price changes with their measured effects and how noisy they are.
-- [ ] What-if slider with revenue, profit after PayPal fees, range, segment risk.
-- [ ] Claude-written segment reactions and a recommended lever, grounded in the model's numbers.
-- [ ] Price canary on real sandbox checkouts with webhooks and an automatic stop rule.
-- [ ] Apply: new plan for new customers, intro offer (trial cycle), consent-first switch link.
-- [ ] Every write to PayPal behind an explicit **Approve** button; AI reads PayPal via the Agent Toolkit.
+- [x] Import real history (UCI, CC BY 4.0) and pull live PayPal sandbox data.
+- [x] Segment customers and fit price sensitivity per product and segment, with uncertainty.
+- [x] History check: past price changes with their measured effects and how noisy they are.
+- [x] What-if slider with revenue, profit after PayPal fees, range, segment risk.
+- [x] Claude-written segment reactions and a recommended lever, grounded in the model's numbers.
+- [x] Price canary on real sandbox checkouts with webhooks and an automatic stop rule (webhook needs a public URL to fire).
+- [x] Apply: new plan for new customers, intro offer (trial cycle), consent-first switch link.
+- [x] Every write to PayPal behind an explicit **Approve** button; AI reads PayPal via the Agent Toolkit.
 - [ ] Hosted on Render, public repo with MIT license, README, demo video under 3 minutes.
 
 **Stretch**
@@ -185,6 +185,10 @@ This answers the known weakness of pure AI "synthetic customers": they are not a
 
 ---
 
+### Sign-in
+
+Better Auth with Google and GitHub, stored in the same SQLite file. Anyone may sign in; everyone shares the demo shop, and each approved action records who approved it. `/app/*` redirects to `/sign-in` without a session cookie (proxy), and every `/api` write checks the session. Storefront and club pages stay public for buyers. Google's consent screen must be set to "In production" so judges outside the test-user list can sign in. Callback URLs: `<BETTER_AUTH_URL>/api/auth/callback/google` and `/github`.
+
 ## 9. Build schedule
 
 **Day 1, Tue 10 Nov (India evening)**
@@ -194,14 +198,15 @@ This answers the known weakness of pure AI "synthetic customers": they are not a
 - [x] PayPal REST client (orders, products, plans, intro offers, price update, revise, reporting, webhook verification).
 - [x] Agent Toolkit bridge: in-process MCP server exposing 10 read-only PayPal tools to Claude (verified).
 - [x] Claude layer: segment voices (structured output) and advisor loop with proposals (needs API key to run live).
-- [ ] Sandbox seeding script and first live calls (needs your PayPal sandbox keys).
+- [x] Sandbox seeding script and first live calls (smoke-live 8/8 on 10 Nov).
 
 **Day 2, Wed 11 Nov**
-- [ ] UI: shop overview, history check, what-if slider, AG Grid twins table.
-- [ ] Claude segment reactions and advisor proposals.
-- [ ] Canary: checkout buttons with assigned price, webhooks, stop rule.
-- [ ] Apply: new plan, intro offer, consent-first switch link.
-- [ ] Deploy to Render; end-to-end run in sandbox.
+- [x] UI: shop overview, history check, what-if slider, AG Grid groups table, price test, apply, storefront, Gift Box Club page (DESIGN.md records the system).
+- [x] Claude segment reactions and advisor proposals, wired into What-if with approve/dismiss and handoff to Price test or Apply.
+- [x] Canary: checkout buttons with assigned price, webhooks, stop rule, labelled simulated shoppers.
+- [x] Apply: new plan, intro offer, consent-first switch link; plan-wide update shows PayPal's refusal inline.
+- [x] Sign-in with Better Auth (Google, GitHub; dev email login locally). Needs OAuth keys.
+- [ ] Deploy to Render; end-to-end run in sandbox (buyer checkout needs a sandbox personal account; webhook needs PAYPAL_WEBHOOK_ID).
 - [ ] Record and upload the video by midnight India time.
 
 **Day 3, Thu 12 Nov (until 6 PM India)**

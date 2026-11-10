@@ -27,6 +27,15 @@ a one-person shop on PayPal has nothing.
 6. **Apply with PayPal-native levers**: new price for new customers, intro offers, a consent-first
    plan switch for existing subscribers, or a plan-wide update. Every write needs your approval.
 
+## Screens
+
+- **Overview**: the product's KPIs, how much buyers react to price as a range, weekly units against list price, live PayPal sandbox transactions, and the customer groups.
+- **History check**: every past price change in the shop, what saka would have predicted, and whether the real result landed in the range.
+- **What-if**: a price slider with profit, revenue and units ranges, the group most at risk, Claude's take on how each group reacts, and an advisor that proposes the next step for you to approve.
+- **Price test**: start a canary, share a storefront link, watch the range narrow with each checkout, and let the stop rule end a losing test.
+- **Apply**: roll out a price, or change the Gift Box Club subscription on PayPal. Every write shows what will happen and waits for your approval; PayPal's refusals are shown as they are.
+- **Storefront** (`/store/<test id>`) and **Gift Box Club** (`/store/club`): public buyer pages with PayPal checkout and subscribe buttons.
+
 ## How PayPal is used
 
 | Stage | PayPal capability |
@@ -75,13 +84,20 @@ pnpm dev                     # http://localhost:3000
 pnpm test                    # engine unit tests
 ```
 
+Sign-in uses [Better Auth](https://www.better-auth.com) with Google and GitHub. Any account can sign in to the shared demo shop.
+
+- Google: create an OAuth client (Web) in Google Cloud Console with redirect URI `<BETTER_AUTH_URL>/api/auth/callback/google`.
+- GitHub: create an OAuth App at github.com/settings/developers with callback `<BETTER_AUTH_URL>/api/auth/callback/github`.
+- Put the IDs and secrets in `.env.local` (see `.env.example`). A provider's button only appears once its keys are set.
+- For local work without OAuth keys, set `SAKA_DEV_LOGIN=1` to get an email form on the sign-in page. It never runs in production.
+
 PayPal sandbox setup: create an app in the PayPal developer dashboard, enable Transaction search
 and Subscriptions on it, and add a webhook to `/api/paypal/webhook`. Details are in
 [PLAN.md, section 8](./PLAN.md#8-owner-setup-checklist-needs-your-accounts).
 
 ## Tech stack
 
-Next.js 16 · TypeScript · Tailwind · AG Grid · Node built-in SQLite · Anthropic SDK ·
+Next.js 16 · TypeScript · Tailwind · AG Grid · Node built-in SQLite · Better Auth · Anthropic SDK ·
 PayPal Agent Toolkit · Model Context Protocol SDK · Vitest · Render
 
 ## License
